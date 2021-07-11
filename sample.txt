@@ -1,0 +1,80 @@
+===page 1===
+This is a normally formatted piece of text that should be normally rendered in discord along with *italic*, **bold**, __underlined__, `inline codeblocks` and ~~crossed~~ text.
+None of these should ever be modified by the parser.
+
+|/| These are comments and will not be rendered by the parser.
+
+|/
+You can also make comments multiline
+like this.
+/|
+
+Next comes codeblocks.
+
+Codeblocks are to be represented as shown below:
+
+[+label1+]
+[+label2+]
+
+The content of the codeblocks are to be specified later in the page using labels and sub-labels to allow for dynamic rendering.
+
+Note that everything upto this point will be rendered in the order you write them in.
+
+Additional components (components that wont be immiediately rendered in text) and contents of codeblocks are to be mentioned after text components as shown below
+
+###---###
+
+$$label1$$
+>>>js
+for(let i = 0; i < 100; i++){
+  console.log(i)
+}
+>>>py
+for i in range(100):
+  print(i)
+>>>anything
+note that the sub-label can be literally anything.
+$$label2$$
+>>>also
+note that content for all codeblocks should be specified or an error will be thrown.
+
+|/ 
+Buttons work similiarly, you need to specify the fields listed below
+Some of them have default values
+style (defaults to PRIMARY)
+label (no default value/ mandatory field)
+customId (defaults to a generated value)
+url (only necessary for link styled buttons/ mandatory if the button style is link)
+disabled (defaults to false)
+
+read more about buttons here: https://discord.com/developers/docs/interactions/message-components#buttons
+note: A message can have 5 component rows which can each hold 5 buttons so we can have 5 sets of buttons at most which can each have upto 5 buttons.
+a row is enclosed in "::::"
+/|
+
+::::
+
+style: PRIMARY
+label: my button label
+customId: my-id
+disabled: false
+
+%%%%
+
+style: SUCCESS
+label: pwetty green button
+customId: gween
+disabled: true
+
+::::
+
+::::
+
+style: LINK
+label: click me!
+link: https://paste.cheeze2000.net/funosu
+
+::::
+
+===page 2===
+Rinse repeat
