@@ -1,6 +1,6 @@
 function parse(input) {
 
-  // Remove comments, Could've been done with one replace but the regex looked rather ugly.
+  // Remove comments.
   input = input.replace(/<!(-{2,3}).+?\1>/gs, "");
 
   // Extracting page titles
@@ -41,7 +41,7 @@ function parse(input) {
 
       const l = e.groups.content.match(/(?<=^>>>).+?(?=\n)/gm);
       if (a.some(e => !/\S+/.test(e))) throw new Error("Empty codeblock detected");
-      a = a.map((y, i) => { return { label: l[i], content: y }; });
+      a = a.map((y, i) => { return { label: l[i], content: "```" + l[i].split(" ")[0] + "\n" + y + "```" }; });
       codeBlocks[i].push({ name: e.groups.label, content: a });
     }
   }
