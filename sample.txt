@@ -1,13 +1,15 @@
-===page 1===
+# page 1
 This is a normally formatted piece of text that should be normally rendered in discord along with *italic*, **bold**, __underlined__, `inline codeblocks` and ~~crossed~~ text.
 None of these should ever be modified by the parser.
 
-|/| These are comments and will not be rendered by the parser.
+<!-- These are comments and will not be rendered by the parser -->
 
-|/
+<!--
 You can also make comments multiline
 like this.
-/|
+-->
+
+<!--- this works too!!! --->
 
 Next comes codeblocks.
 
@@ -38,7 +40,7 @@ $$label2$$
 >>>also
 note that content for all codeblocks should be specified or an error will be thrown.
 
-|/ 
+<!--
 Buttons work similiarly, you need to specify the fields listed below
 Some of them have default values
 style (defaults to PRIMARY)
@@ -50,7 +52,7 @@ disabled (defaults to false)
 read more about buttons here: https://discord.com/developers/docs/interactions/message-components#buttons
 note: A message can have 5 component rows which can each hold 5 buttons so we can have 5 sets of buttons at most which can each have upto 5 buttons.
 a row is enclosed in "::::"
-/|
+-->
 
 ::::
 
@@ -76,5 +78,5 @@ link: https://paste.cheeze2000.net/funosu
 
 ::::
 
-===page 2===
+# page 2
 Rinse repeat

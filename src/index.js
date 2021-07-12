@@ -1,17 +1,13 @@
-const { readFileSync, writeFile } = require("fs");
-
-const i = readFileSync("../sample.txt", "utf8");
-
 function parse(input) {
 
   // Remove comments, Could've been done with one replace but the regex looked rather ugly.
-  input = input.replace(/\|\|\/.+\n?/g, "").replace(/\|\/.+?\/\|\n?/gs, "");
+  input = input.replace(/<!(-{2,3}).+?\1>/gs, "");
 
   // Extracting page titles
-  const unFilteredTitles = input.match(/(?<=^===).+?(?====\s*$)/gm);
+  const unFilteredTitles = input.match(/(?<=^# ).+/gm);
   const titles = [];
 
-  const unFilteredPages = input.split(/^===.+?===\s*$/gm);
+  const unFilteredPages = input.split(/^# .+\s*$/gm);
   unFilteredPages.shift();
 
   // Remove blank pages and their corresponding titles.
@@ -20,6 +16,9 @@ function parse(input) {
     if (/\S+/.test(unFilteredPages[i])) {
       pages.push(unFilteredPages[i]);
       titles.push(unFilteredTitles[i]);
+    }
+    else {
+      console.warn("Empty page detected");
     }
   }
 
@@ -35,7 +34,7 @@ function parse(input) {
   const codeBlocks = [];
   for (let i = 0; i < components.length; i++) {
     codeBlocks[i] = [];
-    const x = components[i].matchAll(/\$\$(?<label>.+?)\$\$\n(?<content>.+?)(?=\$\$.+?\$\$\n|::::)/gs);
+    const x = components[i].matchAll(/\$\$(?<label>.+?)\$\$\n(?<content>.+?)(?=\$\$.+?\$\$\n|::::|# .+?\n)/gs);
     for (const e of x) {
       let a = e.groups.content.split(/^>>>.+?\n\s*/gm);
       a.shift();
@@ -81,9 +80,5 @@ function parse(input) {
 
   return output;
 }
-const jsonString = JSON.stringify(parse(i));
 
-writeFile("../output.json", jsonString, err => {
-  if (err) console.log(err);
-  else console.log("Write successful");
-});
+module.exports.parse = parse;
